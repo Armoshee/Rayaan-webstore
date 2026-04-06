@@ -4,7 +4,78 @@
   <title>Women's Wear Collection</title>
   <link rel="icon" type="image/png" href="logo.png">
   <style>
-    /* --- same CSS as before --- */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      padding: 20px;
+    }
+    .section {
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+      padding: 24px;
+      margin-bottom: 24px;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .section h2 {
+      margin-top: 0;
+      color: #1f8a70;
+    }
+    .product {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;   /* space between image and details */
+}
+.product-image img {
+  width: 150px;
+  height: 250px;
+  object-fit: cover;
+}
+.product-details {
+  flex: 1;   /* take remaining space */
+}
+
+    .color-btn {
+      padding: 8px 12px;
+      margin: 5px 6px 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: white;
+      cursor: pointer;
+      transition: border-color 0.25s ease, background-color 0.25s ease;
+    }
+    .color-btn:hover {
+      border-color: #1f8a70;
+      background: #f0faf9;
+    }
+    .color-btn.selected {
+      border: 2px solid #1f8a70;
+      background-color: #e0f4f1;
+    }
+    .btn {
+      padding: 10px 18px;
+      margin: 10px 12px 0 0;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #1f8a70;
+      color: white;
+      font-weight: bold;
+      transition: background-color 0.25s ease, transform 0.15s ease;
+    }
+    .btn:hover {
+      background-color: #166957;
+      transform: translateY(-1px);
+    }
+    .footer {
+      text-align: center;
+      padding: 18px 0;
+      color: #777;
+    }
   </style>
 </head>
 <body>
@@ -13,7 +84,7 @@
   <section class="section">
     <h2>Elegant Women's Sarees</h2>
     <div class="product-image">
-      <img id="sareeImage" src="saree-cream.jpg" alt="Women Saree">
+      <img id="sareeImage" src="public/images/saree-cream.jpg" alt="Women Saree">
     </div>
 
     <p><strong>Price:</strong> ₹699</p>
@@ -21,21 +92,21 @@
 
     <div class="colors saree-colors">
       <label>Available Colors:</label><br>
-      <button type="button" class="color-btn selected" onclick="selectSareeColor(this,'Cream','saree-cream.jpg')">Cream</button>
-      <button type="button" class="color-btn" onclick="selectSareeColor(this,'Megenda','saree-megenta.jpg')">Megenda</button>
-      <button type="button" class="color-btn" onclick="selectSareeColor(this,'Peach','saree.jpg')">Peach</button>
-      <button type="button" class="color-btn" onclick="selectSareeColor(this,'Red','saree-red.jpg')">Red</button>
+      <button type="button" class="color-btn selected" onclick="selectSareeColor(this,'Cream','public/images/saree-cream.jpg')">Cream</button>
+      <button type="button" class="color-btn" onclick="selectSareeColor(this,'Magenta','public/images/saree-megenta.jpg')">Magenta</button>
+      <button type="button" class="color-btn" onclick="selectSareeColor(this,'Peach','public/images/saree.jpg')">Peach</button>
+      <button type="button" class="color-btn" onclick="selectSareeColor(this,'Red','public/images/saree-red.jpg')">Red</button>
     </div>
 
     <button type="button" class="btn" onclick="addSelectedSareeToCart()">Add to Cart</button>
+    <button type="button" class="btn" onclick="openCart()">Go to Cart</button>
   </section>
 
   <!-- Kurta Section -->
   <section class="section">
     <h2>Anni Designer Pure Cotton Maroon Kurta Pant Set with Dupatta for Women</h2>
-
     <div class="product-image">
-      <img id="kurtaImage" src="womens-ethicks-wear.jpg" alt="Kurta Pant Set">
+      <img id="kurtaImage" src="public/images/womens-ethicks-wear.jpg" alt="Kurta Pant Set">
     </div>
 
     <p><span style="text-decoration:line-through;">₹1,199</span> <strong>₹599</strong> (50% off)</p>
@@ -43,10 +114,10 @@
 
     <div class="colors kurta-colors">
       <label>Available Colors:</label><br>
-      <button class="color-btn selected" onclick="selectKurtaColor(this,'Meroon','womens-ethicks-wear.jpg')">Meroon</button>
-      <button class="color-btn" onclick="selectKurtaColor(this,'Blue','womens-ethicks-wear1.jpg')">Blue</button>
-      <button class="color-btn" onclick="selectKurtaColor(this,'Green','womens-ethicks-wear2.jpg')">Green</button>
-      <button class="color-btn" onclick="selectKurtaColor(this,'Wine','womens-ethicks-wear5.jpg')">Wine</button>
+      <button class="color-btn selected" onclick="selectKurtaColor(this, 'Meroon', 'womens-ethicks-wear.jpg')">Meroon</button>
+      <button class="color-btn" onclick="selectKurtaColor(this, 'Blue', 'womens-ethicks-wear1.jpg')">Blue</button>
+      <button class="color-btn" onclick="selectKurtaColor(this, 'Green', 'womens-ethicks-wear2.jpg')">Green</button>
+      <button class="color-btn" onclick="selectKurtaColor(this, 'Wine', 'womens-ethicks-wear5.jpg')">Wine</button>
     </div>
 
     <div class="sizes">
@@ -61,14 +132,6 @@
       </select>
     </div>
 
-    <div class="filters">
-      <h4>Delivery Day</h4>
-      <label><input type="checkbox" /> Get It by Tomorrow</label><br>
-      <label><input type="checkbox" /> Get It in 2 Days</label>
-      <h4>Eligible for Free Shipping</h4>
-      <label><input type="checkbox" /> Free Shipping</label>
-    </div>
-
     <button class="btn" onclick="addSelectedKurtaToCart()">Add to Cart</button>
     <button class="btn" onclick="openCart()">Go to Cart</button>
   </section>
@@ -78,7 +141,7 @@
   </footer>
 
   <script>
-    // Saree logic
+    // Saree Logic
     let selectedSareeColor = 'Cream';
     let selectedSareeImage = 'saree-cream.jpg';
 
@@ -92,10 +155,18 @@
 
     function addSelectedSareeToCart() {
       const productName = `Elegant Women's Saree - ${selectedSareeColor}`;
-      addToCart(productName, 699, selectedSareeImage);
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let existing = cart.find(item => item.name === productName);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({ name: productName, price: 699, image: selectedSareeImage, quantity: 1 });
+      }
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(`${productName} added to cart!`);
     }
 
-    // Kurta logic
+    // Kurta Logic
     let selectedKurtaColor = 'Meroon';
     let selectedKurtaImage = 'womens-ethicks-wear.jpg';
 
@@ -109,11 +180,22 @@
 
     function addSelectedKurtaToCart() {
       const size = document.getElementById('kurtaSizeSelect').value;
-      const productName = `Kurta Pant Set with Dupatta - ${selectedKurtaColor} - Size ${size}`;
-      addToCart(productName, 599, selectedKurtaImage);
+      const productName = `Kurta Pant Set - ${selectedKurtaColor} - Size ${size}`;
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let existing = cart.find(item => item.name === productName);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({ name: productName, price: 599, image: selectedKurtaImage, quantity: 1 });
+      }
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(`${productName} added to cart!`);
+    }
+
+    // Common Cart Redirect
+    function openCart() {
+      window.location.href = "cart.html";
     }
   </script>
-
-  <script src="script.js"></script>
 </body>
 </html>
