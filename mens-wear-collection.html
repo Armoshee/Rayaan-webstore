@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Men's Wear Collection</title>
-  <link rel="icon" type="image/png" href="public/images/logo.png">
+  <link rel="icon" type="image/png" href="logo.png">
   <style>
     body {
       margin: 0;
@@ -105,7 +105,7 @@
     <h2>Adidas Striped Regular T-Shirt (FJ9216)</h2>
 
     <div class="product-image">
-      <img id="mainImage" src="public/images/black-tshirt.jpg" alt="Adidas Striped Regular T-Shirt">
+      <img id="mainImage" src="black-tshirt.jpg" alt="Adidas Striped Regular T-Shirt">
     </div>
 
     <p><span style="text-decoration:line-through;">₹1,199</span> <strong>₹599</strong> (50% off)</p>
@@ -113,11 +113,11 @@
 
     <div class="colors">
       <label>Available Colors:</label><br>
-      <button class="color-btn selected" onclick="selectShirtColor(this, 'Black', 'public/images/black-tshirt.jpg')">Black</button>
-      <button class="color-btn" onclick="selectShirtColor(this, 'Blue', 'public/images/blue-tshirt.jpg')">Blue</button>
-      <button class="color-btn" onclick="selectShirtColor(this, 'Red', 'public/images/red-tshirt.jpg')">Red</button>
-      <button class="color-btn" onclick="selectShirtColor(this, 'Navy', 'public/images/navy-tshirt.jpg')">Navy</button>
-      <button class="color-btn" onclick="selectShirtColor(this, 'Boonix', 'public/images/boonix-tshirt.jpg')">Boonix</button>
+      <button class="color-btn selected" onclick="selectShirtColor(this, 'Black', 'black-tshirt.jpg')">Black</button>
+      <button class="color-btn" onclick="selectShirtColor(this, 'Blue', 'blue-tshirt.jpg')">Blue</button>
+      <button class="color-btn" onclick="selectShirtColor(this, 'Red', 'red-tshirt.jpg')">Red</button>
+      <button class="color-btn" onclick="selectShirtColor(this, 'Navy', 'navy-tshirt.jpg')">Navy</button>
+      <button class="color-btn" onclick="selectShirtColor(this, 'Boonix', 'boonix-tshirt.jpg')">Boonix</button>
     </div>
 
     <div class="sizes">
@@ -150,7 +150,7 @@
 
   <script>
     let selectedShirtColor = 'Black';
-    let selectedShirtImage = 'public/images/black-tshirt.jpg';
+    let selectedShirtImage = 'black-tshirt.jpg';
 
     function selectShirtColor(button, color, imageUrl) {
       selectedShirtColor = color;
