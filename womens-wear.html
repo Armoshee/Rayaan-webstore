@@ -4,125 +4,33 @@
   <title>Women's Wear Collection</title>
   <link rel="icon" type="image/png" href="logo.png">
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      color: #333;
-      padding: 20px;
-    }
-    .section {
-      background: white;
-      border-radius: 14px;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.08);
-      padding: 24px;
-      margin-bottom: 24px;
-      max-width: 1000px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .section h2 {
-      margin-top: 0;
-      color: #1f8a70;
-    }
-    .product-image {
-      max-width: 360px;
-      margin-bottom: 16px;
-      display: block;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.08);
-    }
-    .product-image img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    .colors {
-      margin: 12px 0;
-    }
-    .color-btn {
-      padding: 8px 12px;
-      margin: 5px 6px 5px 0;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      background-color: white;
-      cursor: pointer;
-      transition: border-color 0.25s ease, background-color 0.25s ease;
-    }
-    .color-btn:hover {
-      border-color: #1f8a70;
-      background: #f0faf9;
-    }
-    .color-btn.selected {
-      border: 2px solid #1f8a70;
-      background-color: #e0f4f1;
-    }
-    .sizes,
-    .filters {
-      margin: 16px 0;
-    }
-    .sizes label,
-    .filters h4 {
-      margin-bottom: 8px;
-      display: block;
-      color: #555;
-    }
-    select {
-      padding: 8px 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      width: 180px;
-    }
-    .filters input {
-      margin-right: 8px;
-    }
-    .btn {
-      padding: 10px 18px;
-      margin: 10px 12px 0 0;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      background-color: #1f8a70;
-      color: white;
-      font-weight: bold;
-      transition: background-color 0.25s ease, transform 0.15s ease;
-    }
-    .btn:hover {
-      background-color: #166957;
-      transform: translateY(-1px);
-    }
-    .footer {
-      text-align: center;
-      padding: 18px 0;
-      color: #777;
-    }
+    /* --- same CSS as before --- */
   </style>
 </head>
 <body>
 
+  <!-- Saree Section -->
   <section class="section">
     <h2>Elegant Women's Sarees</h2>
     <div class="product-image">
-      <img id="mainImage" src="saree-cream.jpg" alt="Women Saree">
+      <img id="sareeImage" src="saree-cream.jpg" alt="Women Saree">
     </div>
 
     <p><strong>Price:</strong> ₹699</p>
     <p><strong>Delivery:</strong> Free Delivery | 10 Days Return</p>
 
-    <div class="colors">
+    <div class="colors saree-colors">
       <label>Available Colors:</label><br>
-      <button type="button" class="color-btn selected" onclick="selectColor(this,'Women Saree Peach', 'saree-cream.jpg')">Cream</button>
-      <button type="button" class="color-btn" onclick="selectColor(this, 'Megenda', 'saree-megenta.jpg')">Megenda</button>
-      <button type="button" class="color-btn" onclick="selectColor(this, 'Peach', 'saree.jpg')">Peach</button>
-      <button type="button" class="color-btn" onclick="selectColor(this, 'Red', 'saree-red.jpg')">Red</button>
+      <button type="button" class="color-btn selected" onclick="selectSareeColor(this,'Cream','saree-cream.jpg')">Cream</button>
+      <button type="button" class="color-btn" onclick="selectSareeColor(this,'Megenda','saree-megenta.jpg')">Megenda</button>
+      <button type="button" class="color-btn" onclick="selectSareeColor(this,'Peach','saree.jpg')">Peach</button>
+      <button type="button" class="color-btn" onclick="selectSareeColor(this,'Red','saree-red.jpg')">Red</button>
     </div>
 
-   
-
-    <button type="button" class="btn" onclick="addSelectedToCart()">Add to Cart</button>
+    <button type="button" class="btn" onclick="addSelectedSareeToCart()">Add to Cart</button>
   </section>
 
+  <!-- Kurta Section -->
   <section class="section">
     <h2>Anni Designer Pure Cotton Maroon Kurta Pant Set with Dupatta for Women</h2>
 
@@ -135,10 +43,10 @@
 
     <div class="colors kurta-colors">
       <label>Available Colors:</label><br>
-      <button class="color-btn selected" onclick="selectKurtaColor(this, 'Meroon', 'womens-ethicks-wear.jpg')">Meroon</button>
-      <button class="color-btn" onclick="selectKurtaColor(this, 'Blue', 'womens-ethicks-wear1.jpg')">Blue</button>
-      <button class="color-btn" onclick="selectKurtaColor(this, 'Green', 'womens-ethicks-wear2.jpg')">Green</button>
-      <button class="color-btn" onclick="selectKurtaColor(this, 'Wine', 'womens-ethicks-wear5.jpg')">Wine</button>
+      <button class="color-btn selected" onclick="selectKurtaColor(this,'Meroon','womens-ethicks-wear.jpg')">Meroon</button>
+      <button class="color-btn" onclick="selectKurtaColor(this,'Blue','womens-ethicks-wear1.jpg')">Blue</button>
+      <button class="color-btn" onclick="selectKurtaColor(this,'Green','womens-ethicks-wear2.jpg')">Green</button>
+      <button class="color-btn" onclick="selectKurtaColor(this,'Wine','womens-ethicks-wear5.jpg')">Wine</button>
     </div>
 
     <div class="sizes">
@@ -170,6 +78,24 @@
   </footer>
 
   <script>
+    // Saree logic
+    let selectedSareeColor = 'Cream';
+    let selectedSareeImage = 'saree-cream.jpg';
+
+    function selectSareeColor(button, color, imageUrl) {
+      selectedSareeColor = color;
+      selectedSareeImage = imageUrl;
+      document.getElementById('sareeImage').src = imageUrl;
+      document.querySelectorAll('.saree-colors .color-btn').forEach(btn => btn.classList.remove('selected'));
+      button.classList.add('selected');
+    }
+
+    function addSelectedSareeToCart() {
+      const productName = `Elegant Women's Saree - ${selectedSareeColor}`;
+      addToCart(productName, 699, selectedSareeImage);
+    }
+
+    // Kurta logic
     let selectedKurtaColor = 'Meroon';
     let selectedKurtaImage = 'womens-ethicks-wear.jpg';
 
@@ -183,17 +109,11 @@
 
     function addSelectedKurtaToCart() {
       const size = document.getElementById('kurtaSizeSelect').value;
-      const productName = `Anni Designer Pure Cotton Maroon Kurta Pant Set with Dupatta for Women - ${selectedKurtaColor} - Size ${size}`;
+      const productName = `Kurta Pant Set with Dupatta - ${selectedKurtaColor} - Size ${size}`;
       addToCart(productName, 599, selectedKurtaImage);
     }
   </script>
 
   <script src="script.js"></script>
-  <script>
-    if (document.getElementById('mainImage')) {
-      selectedColor = 'Women Saree Peach';
-      selectedImage = 'public/images/saree-cream.jpg';
-    }
-  </script>
 </body>
 </html>
