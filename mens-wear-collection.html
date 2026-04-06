@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Men's Wear Collection</title>
+  <link rel="icon" type="image/png" href="public/images/logo.png">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      padding: 20px;
+    }
+    .section {
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+      padding: 24px;
+      margin: 20px auto;
+      max-width: 1000px;
+    }
+    .section h2 {
+      margin-top: 0;
+      color: #1f8a70;
+    }
+    .product-image {
+      max-width: 380px;
+      margin-bottom: 16px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+    }
+    .product-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .colors {
+      margin: 12px 0;
+    }
+    .color-btn {
+      padding: 8px 12px;
+      margin: 5px 6px 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: white;
+      cursor: pointer;
+      transition: border-color 0.25s ease, background-color 0.25s ease;
+    }
+    .color-btn:hover {
+      border-color: #1f8a70;
+      background: #f0faf9;
+    }
+    .color-btn.selected {
+      border: 2px solid #1f8a70;
+      background-color: #e0f4f1;
+    }
+    .sizes,
+    .filters {
+      margin: 16px 0;
+    }
+    .sizes label,
+    .filters h4 {
+      margin-bottom: 8px;
+      display: block;
+      color: #555;
+    }
+    select {
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      width: 180px;
+    }
+    .filters label {
+      display: block;
+      margin-bottom: 8px;
+      color: #555;
+    }
+    .btn {
+      padding: 10px 18px;
+      margin: 10px 12px 0 0;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #1f8a70;
+      color: white;
+      font-weight: bold;
+      transition: background-color 0.25s ease, transform 0.15s ease;
+    }
+    .btn:hover {
+      background-color: #166957;
+      transform: translateY(-1px);
+    }
+    .footer {
+      text-align: center;
+      padding: 18px 0;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <section class="section">
+    <h2>Adidas Striped Regular T-Shirt (FJ9216)</h2>
+
+    <div class="product-image">
+      <img id="mainImage" src="public/images/black-tshirt.jpg" alt="Adidas Striped Regular T-Shirt">
+    </div>
+
+    <p><span style="text-decoration:line-through;">₹1,199</span> <strong>₹599</strong> (50% off)</p>
+    <p>Free Delivery | 10 Days Return & Exchange | Pay on Delivery</p>
+
+    <div class="colors">
+      <label>Available Colors:</label><br>
+      <button class="color-btn selected" onclick="selectShirtColor(this, 'Black', 'public/images/black-tshirt.jpg')">Black</button>
+      <button class="color-btn" onclick="selectShirtColor(this, 'Blue', 'public/images/blue-tshirt.jpg')">Blue</button>
+      <button class="color-btn" onclick="selectShirtColor(this, 'Red', 'public/images/red-tshirt.jpg')">Red</button>
+      <button class="color-btn" onclick="selectShirtColor(this, 'Navy', 'public/images/navy-tshirt.jpg')">Navy</button>
+      <button class="color-btn" onclick="selectShirtColor(this, 'Boonix', 'public/images/boonix-tshirt.jpg')">Boonix</button>
+    </div>
+
+    <div class="sizes">
+      <label for="sizeSelect">Size:</label>
+      <select id="sizeSelect">
+        <option value="XS">XS</option>
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L" selected>L</option>
+        <option value="XL">XL</option>
+        <option value="2XL">2XL</option>
+      </select>
+    </div>
+
+    <div class="filters">
+      <h4>Delivery Day</h4>
+      <label><input type="checkbox" /> Get It by Tomorrow</label>
+      <label><input type="checkbox" /> Get It in 2 Days</label>
+      <h4>Eligible for Free Shipping</h4>
+      <label><input type="checkbox" /> Free Shipping</label>
+    </div>
+
+    <button class="btn" onclick="addSelectedShirtToCart()">Add to Cart</button>
+    <button class="btn" onclick="openCart()">Go to Cart</button>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2026 E-commerce Website. All rights reserved.</p>
+  </footer>
+
+  <script>
+    let selectedShirtColor = 'Black';
+    let selectedShirtImage = 'public/images/black-tshirt.jpg';
+
+    function selectShirtColor(button, color, imageUrl) {
+      selectedShirtColor = color;
+      selectedShirtImage = imageUrl;
+      document.getElementById('mainImage').src = imageUrl;
+      document.querySelectorAll('.color-btn').forEach(btn => btn.classList.remove('selected'));
+      button.classList.add('selected');
+    }
+
+    function addSelectedShirtToCart() {
+      const size = document.getElementById('sizeSelect').value;
+      const productName = `Adidas T-Shirt - ${selectedShirtColor} - Size ${size}`;
+      const product = {
+        id: `${selectedShirtColor}-${size}`,
+        name: productName,
+        price: 599,
+        image: selectedShirtImage
+      };
+
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const exists = cart.find(item => item.id === product.id);
+      if (!exists) {
+        cart.push(product);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert(`${product.name} added to cart!`);
+      } else {
+        alert(`${product.name} is already in your cart.`);
+      }
+    }
+
+    function openCart() {
+      window.location.href = 'cart.html';
+    }
+  </script>
+</body>
+</html>

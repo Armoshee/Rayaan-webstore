@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cart</title>
+  <link rel="icon" type="image/png" href="public/images/logo.png">
+</head>
+<body>
+  <h2>My Cart</h2>
+  <section id="cartItems"></section>
+  <p id="totalPrice"></p>
+  <button onclick="clearCart()">Clear Cart</button>
+
+  <script>
+    function showCart() {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const cartItems = document.getElementById("cartItems");
+      const totalPrice = document.getElementById("totalPrice");
+      cartItems.innerHTML = "";
+      let total = 0;
+
+      if (cart.length === 0) {
+        cartItems.innerHTML = "<p>Your cart is empty.</p>";
+        totalPrice.innerHTML = "";
+        return;
+      }
+
+      cart.forEach((item, index) => {
+        let name = item.name || "Unknown Product";
+        let price = item.price || 0;
+        let quantity = item.quantity || 1;
+        let image = item.image || "images/default.jpg";
+
+        total += price * quantity;
+
+        cartItems.innerHTML += `
+          <div class="cart-item" style="display:flex;align-items:center;gap:15px;margin-bottom:10px;">
+            <img src="${image}" alt="${name}" style="width:80px;height:80px;object-fit:cover;border-radius:6px;">
+            <div>
+              <p><strong>${name}</strong> - ₹${price}</p>
+              <p>Quantity: ${quantity}</p>
+              <button onclick="changeQuantity(${index}, 1)">+</button>
+              <button onclick="changeQuantity(${index}, -1)">-</button>
+              <button onclick="removeFromCart(${index})">Remove</button>
+            </div>
+          </div>
+        `;
+      });
+
+      totalPrice.innerHTML = `<strong>Total: ₹${total}</strong>`;
+    }
+
+    function changeQuantity(index, delta) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart[index].quantity = (cart[index].quantity || 1) + delta;
+      if (cart[index].quantity <= 0) {
+        cart.splice(index, 1);
+      }
+      localStorage.setItem("cart", JSON.stringify(cart));
+      showCart();
+    }
+
+    function removeFromCart(index) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      showCart();
+    }
+
+    function clearCart() {
+      localStorage.removeItem("cart");
+      showCart();
+    }
+
+    document.addEventListener("DOMContentLoaded", showCart);
+
+    // ✅ Unified addToCart function
+    function addToCart(productName, price, imagePath) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let existing = cart.find(item => item.name === productName);
+
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({
+          name: productName,
+          price: price,
+          image: imagePath || "images/default.jpg",
+          quantity: 1
+        });
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(productName + " added to cart!");
+    }
+
+
+
+    function openCart() {
+      window.location.href = "cart.html";
+    }
+
+    
+  </script>
+</body>
+</html>

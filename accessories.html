@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Accessories Collection</title>
+  <link rel="icon" type="image/png" href="public/images/logo.png">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      padding: 20px;
+    }
+    .section {
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+      padding: 24px;
+      margin-bottom: 24px;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .product-image img {
+      max-width: 360px;
+      border-radius: 16px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    }
+    .color-btn {
+      margin: 4px;
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .color-btn.selected {
+      background: #1f8a70;
+      color: white;
+    }
+    .add-btn {
+      background: #1f8a70;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+    .add-btn:hover {
+      background: #16624f;
+    }
+    .cart-btn {
+      display: block;
+      margin: 20px auto;
+      background: #ff9800;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .cart-btn:hover {
+      background: #e68900;
+    }
+  </style>
+</head>
+<body>
+  <section class="section">
+    <h2>Smart Watch Collection</h2>
+    <div class="product-image">
+      <img id="watchImage" src="public/images/black-watch.jpg" alt="Smart Watch">
+    </div>
+    <p><span style="text-decoration:line-through;">₹3,999</span> <strong>₹2,999</strong> (25% off)</p>
+    <p>Free Delivery | 7 Days Return & Exchange | Pay on Delivery</p>
+    <div class="colors">
+      <label>Available Colors:</label><br>
+      <button class="color-btn selected" onclick="selectAccessoryColor(this, 'Black', 'public/images/black-watch.jpg')">Black</button>
+      <button class="color-btn" onclick="selectAccessoryColor(this, 'Silver', 'public/images/silver-watch.jpg')">Silver</button>
+      <button class="color-btn" onclick="selectAccessoryColor(this, 'Gold', 'public/images/gold-watch.jpg')">Gold</button>
+    </div>
+    <button class="add-btn" onclick="addAccessoryToCart('Smart Watch', 2999, 'watchImage')">Add to Cart</button>
+  </section>
+
+  <section class="section">
+    <h2>Leather Bag</h2>
+    <div class="product-image">
+      <img id="bagImage" src="public/images/tan-color-bag.jpg" alt="Leather Bag">
+    </div>
+    <p><span style="text-decoration:line-through;">₹5,999</span> <strong>₹4,499</strong> (25% off)</p>
+    <p>Free Delivery | 10 Days Return & Exchange | Pay on Delivery</p>
+    <div class="colors">
+      <label>Available Colors:</label><br>
+      <button class="color-btn selected" onclick="selectAccessoryColor(this, 'Brown', 'public/images/brown-color-bag.jpg')">Brown</button>
+      <button class="color-btn" onclick="selectAccessoryColor(this, 'Black', 'public/images/black-color-bag.jpg')">Black</button>
+      <button class="color-btn" onclick="selectAccessoryColor(this, 'Tan', 'public/images/tan-color-bag.jpg')">Tan</button>
+    </div>
+    <button class="add-btn" onclick="addAccessoryToCart('Leather Bag', 4499, 'bagImage')">Add to Cart</button>
+  </section>
+
+  <section class="section">
+    <h2>Sunglasses</h2>
+    <div class="product-image">
+      <img id="sunglassesImage" src="public/images/sun-glasses-blue.jpg" alt="Sunglasses">
+    </div>
+    <p><span style="text-decoration:line-through;">₹1,999</span> <strong>₹1,299</strong> (35% off)</p>
+    <p>Free Delivery | 7 Days Return & Exchange | Pay on Delivery</p>
+    <div class="colors">
+      <label>Available Colors:</label><br>
+      <button class="color-btn selected" onclick="selectAccessoryColor(this, 'Black', 'public/images/sun-glasses-black.jpg')">Black</button>
+      <button class="color-btn" onclick="selectAccessoryColor(this, 'Blue', 'public/images/sun-glasses-blue.jpg')">Blue</button>
+      <button class="color-btn" onclick="selectAccessoryColor(this, 'Brown', 'public/images/sun-glasses-brown.jpg')">Brown</button>
+    </div>
+    <button class="add-btn" onclick="addAccessoryToCart('Sunglasses', 1299, 'sunglassesImage')">Add to Cart</button>
+  </section>
+
+  <!-- Go to Cart button -->
+  <button class="cart-btn" onclick="goToCart()">Go to Cart</button>
+
+  <script>
+    function selectAccessoryColor(button, color, imagePath) {
+      let siblings = button.parentNode.querySelectorAll('.color-btn');
+      siblings.forEach(btn => btn.classList.remove('selected'));
+      button.classList.add('selected');
+
+      let section = button.closest('.section');
+      let img = section.querySelector('img');
+      img.src = imagePath;
+    }
+
+    function addAccessoryToCart(productName, price, imageId) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let section = event.target.closest('.section');
+
+      let selectedColorBtn = section.querySelector('.color-btn.selected');
+      let color = selectedColorBtn ? selectedColorBtn.textContent : null;
+
+      let imageElement = document.getElementById(imageId);
+      let imagePath = imageElement ? imageElement.src : "images/default.jpg";
+
+      let existing = cart.find(item => item.name === productName && item.color === color);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({ name: productName, price: price, color: color, image: imagePath, quantity: 1 });
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(productName + " (" + color + ") added to cart for ₹" + price);
+    }
+
+    function goToCart() {
+      window.location.href = "cart.html";
+    }
+  </script>
+</body>
+</html>
