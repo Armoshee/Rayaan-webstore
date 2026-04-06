@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Kids Wear Collection</title>
-  <link rel="icon" type="image/png" href="public/images/logo.png">
+  <link rel="icon" type="image/png" href="logo.png">
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f9f9f9; }
     .product {
@@ -108,19 +108,19 @@
     <!-- Product image -->
     <div class="image-gallery">
       <div class="image-box">
-        <img id="mainImage" src="public/images/kids-wear-red.jpg" alt="Kids T-Shirt main view">
+        <img id="mainImage" src="kids-wear-red.jpg" alt="Kids T-Shirt main view">
       </div>
       <div class="image-box">
-        <img id="secondaryImage" src="public/images/kids-wear-purple.jpg" alt="Kids T-Shirt alternate view">
-        <img id="secondaryImage" src="public/images/kids-wear-green.jpg" alt="Kids T-Shirt alternate view">
-        <img id="secondaryImage" src="public/images/kids-wear-blue.jpg" alt="Kids T-Shirt alternate view">
+        <img id="secondaryImage" src="kids-wear-purple.jpg" alt="Kids T-Shirt alternate view">
+        <img id="secondaryImage" src="kids-wear-green.jpg" alt="Kids T-Shirt alternate view">
+        <img id="secondaryImage" src="kids-wear-blue.jpg" alt="Kids T-Shirt alternate view">
       </div>
     </div>
     <div class="thumbnail-row">
-      <img class="thumb selected" src="public/images/kids-wear-red.jpg" alt="Red kids t-shirt" onclick="setMainImage(this)">
-      <img class="thumb" src="public/images/kids-wear-purple.jpg" alt="Purple kids t-shirt" onclick="setMainImage(this)">
-      <img class="thumb" src="public/images/kids-wear-green.jpg" alt="Green kids t-shirt" onclick="setMainImage(this)">
-      <img class="thumb" src="public/images/kids-wear-blue.jpg" alt="Blue kids t-shirt" onclick="setMainImage(this)">
+      <img class="thumb selected" src="kids-wear-red.jpg" alt="Red kids t-shirt" onclick="setMainImage(this)">
+      <img class="thumb" src="pkids-wear-purple.jpg" alt="Purple kids t-shirt" onclick="setMainImage(this)">
+      <img class="thumb" src="kids-wear-green.jpg" alt="Green kids t-shirt" onclick="setMainImage(this)">
+      <img class="thumb" src="kids-wear-blue.jpg" alt="Blue kids t-shirt" onclick="setMainImage(this)">
     </div>
 
     <!-- Product details -->
@@ -131,10 +131,10 @@
     <!-- Color options -->
     <div class="colors">
       <label>Available Colors:</label><br>
-      <button class="color-btn" onclick="selectColor(this, 'Red', 'public/images/kids-wear-red.jpg')">Red</button>
-      <button class="color-btn" onclick="selectColor(this, 'Blue', 'public/images/kids-wear-purple.jpg')">Purple</button>
-      <button class="color-btn" onclick="selectColor(this, 'Yellow', 'public/images/kids-wear-green.jpg')">Green</button>
-      <button class="color-btn" onclick="selectColor(this, 'Green', 'public/images/kids-wear-blue.jpg')">Blue</button>
+      <button class="color-btn" onclick="selectColor(this, 'Red', 'kids-wear-red.jpg')">Red</button>
+      <button class="color-btn" onclick="selectColor(this, 'Blue', 'kids-wear-purple.jpg')">Purple</button>
+      <button class="color-btn" onclick="selectColor(this, 'Yellow', 'kids-wear-green.jpg')">Green</button>
+      <button class="color-btn" onclick="selectColor(this, 'Green', 'kids-wear-blue.jpg')">Blue</button>
     </div>
 
     <!-- Size options -->
@@ -155,7 +155,7 @@
 
 <script>
   let selectedColor = "Red";
-  let selectedImage = "public/images/kids-wear-red.jpg";
+  let selectedImage = "kids-wear-red.jpg";
 
   function selectColor(button, color, imageUrl) {
     selectedColor = color;
